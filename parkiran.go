@@ -460,9 +460,14 @@ func tambahDataParkir(transaksiParkir *Transaksi, jumlahKendaraan *int) {
 					fmt.Println("Masukan Waktu Dengan Format Yang Benar")
 				}
 			}
+			Test = false
 			fmt.Print("Waktu Keluar (dalam format jam, misal 15.45): ")
 			for TestKeluar == false {
 				fmt.Scanln(&transaksi.WaktuKeluar)
+				for transaksi.WaktuKeluar < transaksi.WaktuMasuk {
+					fmt.Println("Masukan waktu keluar lebih besar dari waktu masuk")
+					fmt.Scan(&transaksi.WaktuKeluar)
+				}
 				C = (transaksi.WaktuKeluar)
 				if C < 24.00 {
 					C := int(C)
@@ -478,6 +483,7 @@ func tambahDataParkir(transaksiParkir *Transaksi, jumlahKendaraan *int) {
 					fmt.Println("Masukan Waktu Dengan Format Yang Benar")
 				}
 			}
+			TestKeluar = false
 
 			if transaksi.TipeKendaraan == "Mobil" {
 				transaksi.BiayaParkir = (transaksi.WaktuKeluar - transaksi.WaktuMasuk) * 5000
@@ -493,10 +499,13 @@ func tambahDataParkir(transaksiParkir *Transaksi, jumlahKendaraan *int) {
 			var response string
 			fmt.Scanln(&response)
 			if response != "yes" {
+
 				exit = true
 			}
 		}
 	}
+	Test = false
+	TestKeluar = false
 }
 
 func cetakDaftarKendaraanMasuk(transaksiParkir *Transaksi, jumlahKendaraan *int) {
